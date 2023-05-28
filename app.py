@@ -57,6 +57,10 @@ df_selection = df.query(
 st.title(":bar_chart: Sales Dashboard")
 st.markdown("##")
 
+# ---- DATAFRAME ----
+st.header("Sales Dataframe:")
+st.dataframe(df_selection)
+
 # TOP KPI's
 total_sales = int(df_selection["Total"].sum())
 average_rating = round(df_selection["Rating"].mean(), 1)
