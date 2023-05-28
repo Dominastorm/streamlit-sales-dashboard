@@ -30,7 +30,8 @@ def get_data_from_excel():
 df = get_data_from_excel()
 
 # ---- SIDEBAR ----
-st.sidebar.header("Please Filter Here:")
+# Filtering
+st.sidebar.header("Choose Filtering Here:")
 city = st.sidebar.multiselect(
     "Select the City:",
     options=df["City"].unique(),
@@ -49,9 +50,28 @@ gender = st.sidebar.multiselect(
     default=df["Gender"].unique()
 )
 
+# Sorting
+st.sidebar.header("Choose Sorting Here:")
+sort_by = st.sidebar.selectbox(
+    "Sort Values by:",
+    options=["Total", "Quantity", "Unit price", "Tax 5%", "cogs", "gross margin percentage", "gross income"],
+    index=0,
+)
+
+# Ascending / Descending
+ascending = st.sidebar.radio(
+    "Sort in Ascending or Descending Order:",
+    options=["Ascending", "Descending"],
+    index=1,
+)
+
+# Apply Filters
 df_selection = df.query(
     "City == @city & Customer_type ==@customer_type & Gender == @gender"
 )
+
+# Sort Values
+df_selection = df_selection.sort_values(by=sort_by, ascending=ascending == "Ascending")
 
 # ---- MAINPAGE ----
 st.title(":bar_chart: Sales Dashboard")
