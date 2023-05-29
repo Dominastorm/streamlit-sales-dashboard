@@ -46,23 +46,28 @@ st.dataframe(df_selection)
 
 # ---- USER VIEW ---- 
 
-df_user = df_selection.copy()
+# Get the unique input_idx
+unique_input_idx = sorted(df["input_idx"].unique())
+
+# Create a dataframe for the user view
+df_user = pd.DataFrame({"input_idx": unique_input_idx})
+
+# Add Input Var
+for i in range(len(unique_input_idx)):
+    row = df.query(f"input_idx == @unique_input_idx[{i}]")
+    df_user.at[i, "Input - Var1"] = list(row["Input - Var1"])[0]
+    df_user.at[i, "Input - Var2"] = list(row["Input - Var2"])[0]
+    df_user.at[i, "Input - Var3"] = list(row["Input - Var3"])[0]
+    df_user.at[i, "Input - Var4"] = list(row["Input - Var4"])[0]
 
 # Get the unique models and metrics
-model_types = sorted(df["Model"].unique())
+unique_models = sorted(df["Model"].unique())
 metric_types = sorted(df["Metric"].unique())
 
 # Add the models as columns to the dataframe
-for i in range(len(model_types)):
-    model = model_types[i]
-    df_user[f"Model-{i}"] = model
-
-print('\n\n')
-
-
-# Drop row_idx and Model columns
-df_user = df_user.drop(columns=["row_idx", "Model"])
+for i in range(len(unique_models)):
+    model = unique_models[i]
+    df_user[f"Model - {i}"] = model
 
 st.header("User View")
 st.dataframe(df_user)
-
