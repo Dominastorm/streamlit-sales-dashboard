@@ -68,8 +68,6 @@ for i in range(len(unique_models)):
     model = unique_models[i]
     df_user[f"Model - {i}"] = model
 
-
-print("RUN \n\n\n\n\n\n\n")
 # Output is unique for unique (input_idx, model pairs)
 # Add Output
 for i in range(len(unique_input_idx)):
@@ -79,6 +77,19 @@ for i in range(len(unique_input_idx)):
             df_user.at[i, f"Output - {j}"] = list(row["Output"])[0]
         else:
             df_user.at[i, f"Output - {j}"] = None
+
+# Add Metrics as Columns
+for i in range(len(unique_input_idx)):
+    input_idx = unique_input_idx[i]
+    for j in range(len(metric_types)):
+        metric = metric_types[j]
+        for k in range(len(unique_models)):
+            model = unique_models[k]
+            row = df.query(f"input_idx == @input_idx & Model == @model & Metric == @metric")
+            if row.size:
+                df_user.at[i, f"{metric} - {k}"] = list(row["Score"])[0]
+            else:
+                df_user.at[i, f"{metric} - {k}"] = None
 
 st.header("User View")
 st.dataframe(df_user)
