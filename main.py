@@ -5,6 +5,7 @@ import plotly.express as px
 import streamlit as st  
 
 st.set_page_config(page_title="LLM Dashboard")
+st.header("LLM Dashboard")
 
 # ---- READ CSV ----
 @st.cache
@@ -37,4 +38,31 @@ df_selection = df.query(
     "Model == @model & Feature == @feature & Metric == @metric"
 )
 
+# ---- INTERNAL STORAGE ----
+
+st.header("Internal Storage")
 st.dataframe(df_selection)
+
+
+# ---- USER VIEW ---- 
+
+df_user = df_selection.copy()
+
+# Get the unique models and metrics
+model_types = sorted(df["Model"].unique())
+metric_types = sorted(df["Metric"].unique())
+
+# Add the models as columns to the dataframe
+for i in range(len(model_types)):
+    model = model_types[i]
+    df_user[f"Model-{i}"] = model
+
+print('\n\n')
+
+
+# Drop row_idx and Model columns
+df_user = df_user.drop(columns=["row_idx", "Model"])
+
+st.header("User View")
+st.dataframe(df_user)
+
