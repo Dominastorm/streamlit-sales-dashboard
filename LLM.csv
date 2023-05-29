@@ -1,0 +1,6 @@
+row_idx,input_idx,Input - Var1,Input - Var2,Input - Var3,Input - Var4,Model,Output,Score,Feature,Metric
+0,0,"""a""","""b""","""c""","""d""",gpt-4,"""abcd""",0.4,Maths,Grammar
+1,0,"""a""","""b""","""c""","""d""",claude,"""abc""",0.2,Maths,Grammar
+2,0,"""a""","""b""","""c""","""d""",claude,"""abc""",0.3,Maths,Semantic Similairty
+3,0,"""a""","""b""","""c""","""d""",bert,"""abcd""",0.4,Maths,Grammar
+4,0,"""a""","""b""","""c""","""d""",llama,"""abc""",0.2,Maths,Grammar

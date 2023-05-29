@@ -1,0 +1,17 @@
+What User sees,,,,,,,,,,,,,,
+Input - Var1,Input - Var2,Input - Var3,Input - Var4,Model - 1,Model - 2,Output - 1,Output - 2,Grammar_score - 1,Grammar_score - 2,Sematic Simiarity - 1,Sematic Simiarity - 2,Feature - 1,input_idx,row_idx
+"""a""","""b""","""c""","""d""",gpt-4,claude,"""abcd""","""abc""",0.4,0.2,0.25,0.3,Maths,0,None
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+1. Feature slicing wrt any column,,,,,,,,,,,,,,
+2. Model selection:  Just look at output of claude,,,,,,,,,,,,,,
+3. Sorting by Grammar score,,,,,,,,,,,,,,
+4. Pivoting options,,,,,,,,,,,,,,
+5. Ability to select which metrics to show,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+How we store,,,,,,,,,,,,,,
+Input - Var1,Input - Var2,Input - Var3,Input - Var4,Model name,Output,Score,Feature,Metric Type,row_idx,input_idx,,,,
+"""a""","""b""","""c""","""d""",gpt-4,"""abcd""",0.4,Maths,Grammar,0,0,,,,
+"""a""","""b""","""c""","""d""",claude,"""abc""",0.2,Maths,Grammar,1,0,,,,
+"""a""","""b""","""c""","""d""",claude,"""abc""",0.3,Maths,Semantic Similairty,2,0,,,,
