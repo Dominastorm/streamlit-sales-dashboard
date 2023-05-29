@@ -39,7 +39,6 @@ df_selection = df.query(
 )
 
 # ---- INTERNAL STORAGE ----
-
 st.header("Internal Storage")
 st.dataframe(df_selection)
 
@@ -68,6 +67,18 @@ metric_types = sorted(df["Metric"].unique())
 for i in range(len(unique_models)):
     model = unique_models[i]
     df_user[f"Model - {i}"] = model
+
+
+print("RUN \n\n\n\n\n\n\n")
+# Output is unique for unique (input_idx, model pairs)
+# Add Output
+for i in range(len(unique_input_idx)):
+    for j in range(len(unique_models)):
+        row = df.query(f"input_idx == @unique_input_idx[{i}] & Model == @unique_models[{j}]")
+        if row.size:
+            df_user.at[i, f"Output - {j}"] = list(row["Output"])[0]
+        else:
+            df_user.at[i, f"Output - {j}"] = None
 
 st.header("User View")
 st.dataframe(df_user)
